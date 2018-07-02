@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+vector < vector < pair < int,int > > > Adjlist(1000);
+priority_queue < pair < int,int > > qu;
+vector < int > taken(1000);
+
+// code for process
+
+void process(int vtx)
+{
+   taken[vtx] = 1;
+    for(int i=0;i < (int)Adjlist[vtx].size();i++)
+    {
+       pair < int,int > v = Adjlist[vtx][i];
+       if(!taken[v.first])
+       {
+         qu.push(make_pair(-v.second,-v.first));
+       }
+    }
+}
+
+int main()
+{
+  int V,E;
+  cin>>V>>E;
+
+
+  //input
+  for(int i=0;i<E;i++)
+  {
+    int a,b,w;
+    cin>>a>>b>>w;
+    Adjlist[a].push_back(make_pair(b,w));
+    Adjlist[b].push_back(make_pair(a,w));
+  }
+
+   taken.assign(V,0);
+
+   process(0);
+
+  int mst_cost = 0;
+
+    while(!qu.empty())
+    {
+         pair < int ,int >  frontii = qu.top();
+         qu.pop();
+         int a = -frontii.first;
+         int b = -frontii.second;
+         if(!taken[b])
+         {
+             mst_cost += a;
+             process(b);
+         }
+    }
+    cout<<mst_cost<<endl;
+}

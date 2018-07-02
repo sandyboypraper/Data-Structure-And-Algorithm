@@ -1,0 +1,41 @@
+// there are three types of states 
+// unvisited(0)
+// visited(1)
+// explored(2)
+
+
+// if visited encountyered visitednode(1) in dfs traversing then it define the back edge that means cycle 
+// if visited encountyered unvisitednode(0) then we continue the traversing by calling function for that unvisited node
+// if visited encountyered explored(2) then we declared this edge as forward edge
+
+
+// c++ code;
+
+vector <vector<pair<int,int>>>  Adjlist(n)   // n is the no of vertices
+int dfs_num[n] = {0}; // for storing values 0,1,2 for each node
+
+void graph_cheack(int u)    // u is the sourse vertex
+{
+     dfs_num[u] = 1;
+     for(int i=0;i<(int)Adjlist[u].length;i++)
+     {
+         pair<int,int> p = Adjlist[u][i];
+         if(dfs_num[p.first]==0)
+         {
+             graph_cheack(p.first);
+         }
+         else if(dfs_num[p.first]==1)
+         {
+             // back edge
+             cout<<"back edge"<<u<<" to "<<p.first<<endl;
+         }
+         else if(dfs_num[p.first]==2)
+         {
+              // forward edge
+              cout<<"forward edge"<<u<<" to "<<p.first<<endl;
+         }
+     }
+     dfs_num[u] = 2;
+}
+
+// here the explored state is not that much important :)

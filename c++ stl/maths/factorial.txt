@@ -1,0 +1,15 @@
+// we have MOD
+
+  ull arr[MOD+6] = {0};
+    arr[1] = 1;
+    for(ull i=2;i<MOD+2;i++)
+    {
+        arr[i] = ((arr[i-1]%MOD)*(i%MOD))%MOD;
+    }
+
+ull facto(ull n,ull MOD)
+{
+   if(n>=MOD)
+       return 0;
+   return arr[n];
+}

@@ -1,0 +1,54 @@
+// for SSSp on UW graph we use O(V + E)BFS Algorithm 
+
+// in unweighted graph there are weights and BFS work on Level by Level so whenever we get a unvisited vertex 
+// then this is the Shortest path for it ( no of level for particuler vertex is the shortet path )
+
+
+
+// in programming comptetion they sometime ask for the actual path rather then the path length so we give 
+// this with the help of recurssion and the vector contaning parent of each node
+
+
+in main
+
+// we have Adjlist, bfs_visited array , parent array , pathlength array
+
+// for printint path
+
+printpathto(int u)
+{
+   if(u==source){
+     cout<<u;
+     return;
+   }
+   else
+   {
+      cout<<u<<" ";
+      printpathto(parent[u]);
+   }
+}
+
+queue <int> q;
+q.push(source);
+pathlength[source] = 0;
+
+while(!q.empty())
+{
+     int temp = q.front();
+     q.pop();
+     for(int i=0;i<(int)Adjlist[temp].size();i++)
+     {
+         int k = Adjlist[temp][i];
+        if(bfs_visited[k]==0)
+        {
+           q.push(k);
+           bfs_visited[k] = 1;
+           pathlength[k] = pathlength[temp]+1;
+           parent[k] = temp;
+        }
+     }
+}
+
+// for printing path to some vertex;
+printpathto(that vertex);
+

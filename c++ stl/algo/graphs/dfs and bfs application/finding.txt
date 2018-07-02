@@ -1,0 +1,15 @@
+  ///// we use dfs;
+  
+  
+     // for(all nodes)
+        // if node is unvisited
+         // cc++;,dfs(that unvisited node);
+         
+         
+         
+         inside main
+         
+         
+         numcc = 0;
+         dfs_num.assign(V,unvisited);
+        ..............

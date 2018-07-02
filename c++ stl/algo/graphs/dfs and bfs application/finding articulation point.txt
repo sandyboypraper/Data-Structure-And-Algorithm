@@ -1,0 +1,168 @@
+// Articulation point is like a connectivity of two unconnected graphs ( confusing right ?? ) if we delete some edge or vertices and then after 
+// we got unconnected components then these edge nd vertices are known as articulation point.
+
+
+// two method to do this via DFS
+
+// Normal Dfs
+
+                            // we cheack for every vertex by deleting it that if the resulting graph is unconnected then 
+                            // vertex is Articulation point 
+                            // same for edge
+                            // the Complexity for this in O(V(E+V)) = O(V^2 + VE)  which is not efficient
+                            
+
+
+// Modified Dfs 
+
+
+                            // Complexity O(E+V)
+                            // by running dfs only once;
+                            
+                            
+                            // we use dfs_iter[] and dfs_low[]  for storing no of /...............
+                        
+                        // i just tired for writing this...
+
+// c++ code
+
+//int iterationcount = 1;
+
+//int dfs_low[1000] = {0};
+//int dfs_iter[1000] = {0};
+//int dfsroot;
+//int dfs_parent[1000] = {0};
+//int rootchildren = 0;
+//int Articulation_vertex[1000] = {0};
+//int Articulation_edge[1000][1000] = {0};
+
+void Articulationpoint(int u)
+{
+    dfs_low[u] = dfs_iter[u] = iterationcount++;
+    
+    for(int i=0;i<(int)Adjlist[u].size();i++)
+    {
+        pair<int ,int> v = Adjlist[u][i];
+        
+        if(dfs_iter[v.first]==0)
+        {
+           dfs_parent[v.first] = u;
+           
+           if(u==dfsroot)rootchildren++;
+           Articulationpoint(v.first);
+           
+           if(dfs_low[v.first]>=dfs_iter[u])                        //
+             Articulation_vertex[u] = true;                         //       this
+           if(dfs_low[v.first]>dfs_iter[u])                           //           portion of code written down due to bottom up approch
+              Articulation_edge[u,v.first] = true;                        //
+              
+            dfs_low[u] =  min(dfs_low[u],dfs_low[v.first]); 
+           
+        }
+        
+        else if(v.first!=dfs_parent[u])
+           dfs_low[u] = min(dfs_low[u],dfs_iter[v.first]); // ocuuring of bck edge
+    }
+}
+                            
+    
+    
+    
+// solution of https://www.hackerearth.com/practice/algorithms/graphs/articulation-points-and-bridges/practice-problems/algorithm/rhezo-and-destructive-mind/
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+vector <vector <int>> Adjlist(1000);
+
+int iterationcount = 1;
+
+int dfs_low[1000] = {0};
+int dfs_iter[1000] = {0};
+int dfsroot;
+int dfs_parent[1000] = {0};
+int rootchildren = 0;
+int Articulation_vertex[1000] = {0};
+int Articulation_edge[1000][1000] = {0};
+
+void Articulationpoint(int u)
+{
+    dfs_low[u] = dfs_iter[u] = iterationcount++;
+    
+    for(int i=0;i<(int)Adjlist[u].size();i++)
+    {
+        int v = Adjlist[u][i];
+        
+        if(dfs_iter[v]==0)
+        {
+           dfs_parent[v] = u;
+           
+           if(u==dfsroot)rootchildren++;
+           Articulationpoint(v);
+           
+           if(dfs_low[v]>=dfs_iter[u])                        //
+             Articulation_vertex[u] = 1;                         //       this
+           if(dfs_low[v]>dfs_iter[u])                           //           portion of code written down due to bottom up approch
+              Articulation_edge[u][v] = 1;                        //
+              
+            dfs_low[u] =  min(dfs_low[u],dfs_low[v]); 
+           
+        }
+        
+        else if(v!=dfs_parent[u])
+           dfs_low[u] = min(dfs_low[u],dfs_iter[v]); // ocuuring of bck edge
+    }
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+    
+    for(int i=0;i<m;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+        Adjlist[a].push_back(b);
+        Adjlist[b].push_back(a);
+    }
+    
+    rootchildren = 0;
+    
+    for(int i = 1;i<=n;i++)
+    {
+        dfsroot = i;
+        if(dfs_iter[i]==0)
+             {
+                 Articulationpoint(i);
+                 if(rootchildren>1)
+                      Articulation_vertex[i] = 1;
+                  else
+                   Articulation_vertex[i] = 0;
+                  rootchildren = 0;
+             }
+    }
+
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int a;
+        cin>>a;
+        if(Articulation_vertex[a]==1)
+          cout<<"Satisfied "<<Adjlist[a].size()<<endl;
+        else
+          cout<<"Not Satisfied"<<endl;
+        
+    }
+}
+    
+    
+    
+/// for test cases Aadjlist = vector<vector<int>>(10000)  asign new ;    
+    
+    
+    
+    
+    

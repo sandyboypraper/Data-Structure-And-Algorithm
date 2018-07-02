@@ -1,0 +1,82 @@
+
+
+   	              /// it is like nodes connected with pointers 
+	              in c++ STL list is the doubly link list.
+
+
+so
+
+
+creation>>
+
+                                      list <int or objects> name;
+
+			push_front(element);
+			
+			pop_front();
+
+			push_back(element);
+
+			pop_back();
+
+			reverse();
+
+			sort() // in increasing order;
+
+			size() // returns the no of elements in the list
+
+			empty() // returns 1 if empty otherwise zero
+
+
+
+
+
+adding multiple elements in list in single operation
+
+			listname.assign(number of times,element)
+
+  to copy list		listname.assign(list2.begin(),list2.end())
+
+  to copy array		listname.assign(arr,arr+size)
+
+
+
+
+
+emplace_front()   emplace_back()
+
+			same as push but objests are constructed in place of front and back
+
+
+
+
+
+
+     insert any position
+
+			list.insert(iterator,element)
+
+
+    erase any element  
+ 
+
+                                                   list.erase(it)   list.erase(it1,it2);
+			
+
+
+                                       iterators>>>>
+
+		 list <int> :: iterator it;   // goes from leto right
+
+                                        it = list.begin();
+		        it = list.end();
+	         	        it* gives the element >>>;
+  
+
+
+
+
+
+
+
+

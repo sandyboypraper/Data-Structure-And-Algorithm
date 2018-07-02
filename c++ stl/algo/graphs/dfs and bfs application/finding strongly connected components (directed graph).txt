@@ -1,0 +1,47 @@
+// for strongly connected components in a graph(Directed)
+// we need dfs_num[],dfs_low[],a stack and visited[];
+
+//The basic idea of the algorithm is that SCCs form subtrees in the DFS spanning tree
+//. On top of computing dfs_num(u) and dfs_low(u) for each vertex, we also append vertex u to
+//the back of a stack S ( implemented with a vector) and keep track of the
+//vertices that are currently explored via vi visited. The condition to update dfs_low(u) is,
+//only those vertices that currently have visited flag turned on (part of the current SCC)
+//that can update dfs_low(u). Now, if we have vertex u in this DFS spanning tree with
+//dfs_low(u) = dfs_num(u), we can conclude that u is the root (start) of an SCC and the members of those SCCs are identified by popping
+//the current content of stack S until we reach vertex u (the root) of SCC again
+
+
+// c++ code
+
+vector<int>s;
+int dfs_low[];
+int dfs_num[];
+int dfsNumberCounter = 1;
+int visited[];
+int count = 0;
+vector <vector<int>> Adjlist();
+
+void TarjanScc(int u)
+{
+    dfs_low[u] = dfs_num[u] = dfsNumberCounter++;
+    visited[u] = 1;
+    s.push_back(u);
+    for(int i=0;i<(int)Adjlist[u].size();i++)
+    {
+      int v= Adjlist[u][i];
+      if(dfs_num[v]==0)
+      TarjanScc(v);
+      if(visited[v])
+      dfs_low[u] = min(dfs_low[u],dfs_low[v.first]);
+      
+      if(dfs_low[u]==dfs_num[u])
+      {
+         count++;
+          while(1)
+          {
+            int vr = s.back();s.pop_back();visited[vr] = 0;
+            if(u==v)break;
+          }
+      }
+    }
+}

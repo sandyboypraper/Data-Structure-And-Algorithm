@@ -1,0 +1,13 @@
+vector <int> dfs_num;
+
+
+void dfs(int u)
+{
+       dfs_num(u)  =  visited;
+       for(int j=0;j<(int)Adjlist[u].size();j++)
+           {
+                pair <int,int> v = adjlist[u][j];
+                if(dfs_num[v.first]==unvisited)
+                   dfs(v.first);
+           }
+}

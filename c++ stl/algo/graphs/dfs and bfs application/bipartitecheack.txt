@@ -1,0 +1,70 @@
+in main()  ////   for conected graph
+
+{
+
+   queue <int> q;
+   q.push(s);
+   vector <int> color(V,INF);
+   color[s] = 0;
+   bool isbipaertite = true;
+   while(!q.empty()&&isbipartite)
+   {
+      int u = q.front();q.pop();
+      for(int i= 0;i<(int)Adjlist[u].size();i++)
+      {
+           int v = Adjlist[u][i];
+           if(color[v]==INF)
+           {
+              color[v] = 1-color[u];
+              q.push(v);
+           }
+           else if(color[v]==color[u])
+           {
+              isbipartite = false;
+              break;
+           }
+      }
+   }
+
+}
+
+
+
+int main()  // in non conected graph;
+
+
+{
+
+   queue <int> q;
+  
+   vector <int> color(V,INF);
+  
+   bool isbipaertite = true;
+   for(int i=0;i<v;i++)
+   {
+   if(color[i]==INF)
+   {
+    q.push(i);
+     color[i] = 0;
+   while(!q.empty()&&isbipartite)
+   {
+      int u = q.front();q.pop();
+      for(int i= 0;i<(int)Adjlist[u].size();i++)
+      {
+           int v = Adjlist[u][i];
+           if(color[v]==INF)
+           {
+              color[v] = 1-color[u];
+              q.push(v);
+           }
+           else if(color[v]==color[u])
+           {
+              isbipartite = false;
+              break;
+           }
+      }
+   }
+   }
+   }
+
+}

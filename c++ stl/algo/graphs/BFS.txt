@@ -1,0 +1,24 @@
+int d[1000000] = {0};
+int d1[100000] = {0};
+
+
+queue <int> q;
+q.push(s);
+d[s] = 1;
+
+
+while(!q.empty())
+{
+    int u = q.front();
+    q.pop();
+    for(int j=0;j<(int)Adjlist[u].size();j++)
+    {
+       pair<int ,int>p = adjlist[u][j];
+       if(d[p.first]==0)
+       {
+           d1[p.first] = d1[u] + 1;
+           d[p.first] = 1;
+           q.push(p.first);
+       }
+    }
+}

@@ -1,0 +1,46 @@
+// for this we applied bottom up approch;
+
+// because we can't say about extremly up node;
+
+
+
+
+   vector <int>  ts;
+   
+   void dfs2(int u){
+   
+         dfs_num[u] = visited;
+         for(int j=0;j<{int}Adjlist.size();j++)
+         {
+           
+              pair<int ,int> V =Adjlist[u][j];
+              if(dfs_num[V.first]=unvisited)
+                   dfs2[V.first];
+           
+         }
+         
+         ts.push_back(u); // sorting in oposite order bottom up because it is written in bottom if it is wriittn in up it is UP approch .>>
+         // beacuse recurssion first go bottom and the function first complete for the bottom one node
+   
+   }
+   
+   
+   in main()
+   {
+      
+       ts.clear();
+       memset(dfs_num,unvisited,sizeonodes);
+       
+       for(int i=0;i<V;i++)
+         {
+         
+                if(dfs_num[i]==unvisited)
+                    dfs2(i);
+         
+         }
+         
+       for(int i=(int)ts.size()-1;i>=0;i--)
+          print("%d",ts[i]);
+          print("\n");
+   
+   }

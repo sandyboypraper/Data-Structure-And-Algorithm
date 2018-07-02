@@ -1,0 +1,13 @@
+  O(logn)   :>>>  for searching , fiding min max , insertion nd deletion 
+valid only if tree is balanced ;
+
+  we use c++ STL map >>
+                       map is use when we need map key-->>value pairs;
+                       
+                    
+  and we use c++ STL sets >>
+                            set is use when we need to know a certaian key is exists or not efficiently;
+                            
+                            
+                         
+                        

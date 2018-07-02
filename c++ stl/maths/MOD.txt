@@ -1,0 +1,21 @@
+    |x| = abs(x)  // in c++;
+
+
+
+// mod of devisior 
+// (x/y)%MOD
+//  (x*inv(y))%MOD
+
+ull inv(ull a)
+{
+	ull ans = 1, b = MOD - 2;
+	while (b) {
+		if (b & 1) {
+			ans = (ans * a) % MOD;
+		}
+		b >>= 1;
+		a = (a * a) % MOD;
+	}
+ 
+	return ans;
+}
