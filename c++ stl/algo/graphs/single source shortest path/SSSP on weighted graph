@@ -1,0 +1,139 @@
+/*
+BFS is not the right choice for that
+  so we use the one varient of dijstra algo ( sorry if misspell )
+
+we mantain a priority_queue
+
+c++ code
+
+ go to vertices from source first and then select minimum weight(let say w)  because if we want to reach this vertex via others then this results the
+ larger weight then that minimum (w);
+*/
+
+
+vector<int> dst(V,INT_MAX);
+dst[s] = 0;
+
+priority_queue < pair < int ,int > > pq;
+pq.push(make_pair(0,s));
+
+while(!pq.empty())
+{
+    pair<int,int> front = pq.top();
+    pq.pop();
+    int d = front.first;
+    int u = front.second;
+    
+    
+    if(d>dst[u])continue;  // this is for preventing the repeating same task for already explored optimumly   
+    
+    /* this is for the graph like
+              n = 4,m = 4
+              0 1 1
+              1 2 2 
+              0 2 6
+              0 3 9
+    hope u understand */
+    
+    for(int j=0;j<(int)Adjlist[u].size();j++)
+    {
+          pair<int,int> v = Adjlist[u][j];
+          if(dst[u]+v.second<dst[v.first])
+            {
+               dst[v.first] = dst[u]+v.second;
+               pq.push(make_pair(dst[v.first],v.second))
+            }
+    }
+}
+
+
+
+
+// solution of https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/smart-travel-agent/#c151442
+
+/*
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int source;
+
+stack <int> path;
+
+vector <int> parent(102,-1);
+
+void pritpath(int v)
+{
+    if(v==source)
+    {
+     cout<<v<<" ";
+     while(!path.empty())
+     {
+         cout<<path.top()<<" ";
+         path.pop();
+     }
+     cout<<endl;
+     return;
+    }
+    path.push(v);
+    pritpath(parent[v]);
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+    vector < vector < pair< int,int > > >  Adjlist(102);
+    for(int i=1;i<=m;i++)
+    {
+       int a,b,c;
+       cin>>a>>b>>c;
+       Adjlist[a].push_back(make_pair(b,c-1));
+    }
+    
+    
+    int a,b,c;
+    cin>>a>>b>>c;
+    
+    
+    source = a;
+    
+    vector <int> dst(102,0);
+    dst[a] = INT_MAX;
+    parent[1] = 0;
+    priority_queue < pair<int,int> > qu;
+    qu.push(make_pair(INT_MAX,a));
+    
+    
+    while(!qu.empty())
+    {
+        pair<int,int> front = qu.top();
+        qu.pop();
+        int d = front.first;
+        int u  = front.second;
+        
+        if(d<dst[u])continue;
+        
+        for(int j=0;j<(int)Adjlist[u].size();j++)
+        {
+            pair <int,int> v = Adjlist[u][j];
+            // first -> vertex , second -> weight;
+            int temp = min(dst[u],v.second);
+            
+            if(temp>dst[v.first])
+            {
+                dst[v.first] = temp;
+                parent[v.first] = u;
+                qu.push(make_pair(temp,v.first));
+            }
+            
+        }
+    }
+    
+    pritpath(b);
+    
+    int ans =(c%dst[b]==0)?0:1;
+    ans += c/dst[b];
+    cout<<ans;
+}
+*/
