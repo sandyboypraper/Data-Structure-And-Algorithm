@@ -1,0 +1,13 @@
+// make a mattrix of n*m, n is the lenth of one string and m is of other
+
+// let suppose the case we calculate the case when we want to convert length 3 to length 3
+// and we know l2 to l3,l3 to l2,l2 to l2
+//so we take min of cost for(l2 to l3,l3 to l2,l2 to l2) and add 1 to it to get l3 to l3
+// and so on for other
+// if we choose l2 to l2 then we just add other no so +1
+// if we choose l2 to l3 then we have to replace the last no so +1
+// if we choose l3 to l2 then we add other no so +1
+
+
+// and if the 3rd no of one string is equal to 3rd no of other then we take l2 to l2 for l3 to l3 without +1;
+
