@@ -42,7 +42,7 @@ ___  1
    
 // when devide is there with some condition
 
-// 1> gcd(a,b) = 1;
+// like if   gcd(a,b) = 1;
 
 // then (1/c)%MOD = modInverse(c,MOD);
 
