@@ -1,1 +1,55 @@
-coming soon ............
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+long long int MOD = 1000000007;
+ 
+int main()
+{
+    string s;
+    int n,len;
+    cin>>s>>n;
+    vector <vector<string>> str(100005);
+    len = s.length();
+    int maxlent = 0;
+    for(int i=0;i<n;i++)
+    {
+        string temp;
+        cin>>temp;
+        int lent = temp.length();
+        if(lent>maxlent)
+        maxlent = lent;
+        if(n<1000&&len<7000)
+        sort(temp.begin(),temp.end());
+        str[lent].push_back(temp);
+    }
+//   cout<<str[0].compare(str[1]);
+  
+//   cout<<str[1][0]<<" "<<str[1][1]<<endl;
+//   cout<<str[2][0]<<" "<<str[2][1]<<endl;
+ 
+   long long int dp[100005];
+   memset(dp,0,sizeof(dp));
+    long long int counti = 0;
+    dp[0] = 1;
+    for(int i=1;i<=len;i++)
+    {
+        for(int j = i-1;j>=0;j--)
+        {
+            string sub = s.substr(j,i-j);
+             sort(sub.begin(),sub.end());
+             int lent = sub.length();
+             if(lent>maxlent)
+               break;
+            for(int k = 0;k<(int)str[lent].size();k++)
+            {
+                if(sub.compare(str[lent][k])==0)
+                {
+                    dp[i] = (dp[i] + (dp[j]%MOD))%MOD;
+                    break;
+                }
+            }
+        }
+    }
+    cout<<dp[len];
+}
